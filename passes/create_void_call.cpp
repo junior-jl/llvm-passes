@@ -5,6 +5,9 @@
 #include "llvm/Transforms/IPO/PassManagerBuilder.h"
 #include "llvm/IR/IRBuilder.h"
 
+// TODO: Enable the function call to be placed anywhere in the basic block
+// TODO: Enable the function call to be place in a chosen function (by the user)
+
 using namespace llvm;
 
 namespace {
@@ -13,13 +16,18 @@ namespace {
     CreateVoidCall() : FunctionPass(ID) {}
 
     virtual bool runOnFunction(Function &F) {
-      FunctionType *FuncType = FunctionType::get(Type::getVoidTy(F.getContext()), false);
-      Function *newFunc = Function::Create(FuncType, Function::ExternalLinkage, "my_func");
-      for (auto &B : F)
+      if (F.getName() == "main")
       {
-        IRBuilder<> builder(&B, B.end());
-        builder.CreateCall(newFunc);
+        
+        Module *M = F.getParent();
+        auto myfunc = M->getOrInsertFunction("my_func", Type::getVoidTy(F.getContext()));
+        for (auto &B : F)
+        {
+          IRBuilder<> builder(&B, B.begin());
+          builder.CreateCall(myfunc);
+        }
       }
+      
       
       return true;
     }
