@@ -4,7 +4,7 @@
 #include "llvm/IR/LegacyPassManager.h"
 #include "llvm/Transforms/IPO/PassManagerBuilder.h"
 #include "llvm/ADT/StringRef.h"
-#include <unordered_map>
+#include "llvm/ADT/DenseMap.h"
 using namespace llvm;
 
 namespace {
@@ -13,19 +13,19 @@ namespace {
     PrintFrequency() : FunctionPass(ID) {}
 
     virtual bool runOnFunction(Function &F) {
-      std::unordered_map<const char *, int> occurrences; 
+      DenseMap<const char *, int> occurrences; 
       for (auto &B : F) 
       {
         for (auto &I : B) 
         {
           auto opcode = I.getOpcodeName();
           occurrences[opcode]++;
-          //auto it = occurrences.find(opcode);
-          //if (it != occurrences.end()) 
+          //if (occurrences.count(opcode)) 
           //{
+          //  auto it = occurrences.find(opcode);
           //  it->second++;
           //} else {
-          //  occurrences.emplace(opcode, 1);
+          //  occurrences.insert({opcode, 1});
           //}
         }
       }

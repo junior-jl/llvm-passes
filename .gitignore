@@ -5,3 +5,4 @@ build
 *.ll
 *.bc
 .vscode
+*.tmp

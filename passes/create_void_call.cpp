@@ -18,13 +18,20 @@ namespace {
     virtual bool runOnFunction(Function &F) {
       if (F.getName() == "main")
       {
-        
+        // step tells the number of instruction that the new call will assume (starting by zero)
+        int step = 0;
         Module *M = F.getParent();
         auto myfunc = M->getOrInsertFunction("my_func", Type::getVoidTy(F.getContext()));
         for (auto &B : F)
         {
-          IRBuilder<> builder(&B, B.begin());
-          builder.CreateCall(myfunc);
+          for (auto I = B.begin(); I != B.end(); ++I, --step)
+          {
+            if (step == 0)
+            {
+              IRBuilder<> builder(&B, I);
+              builder.CreateCall(myfunc);
+            }
+          }
         }
       }
       
