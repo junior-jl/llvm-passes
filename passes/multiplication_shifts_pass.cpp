@@ -17,7 +17,7 @@ namespace {
     static char ID;
     MultiplicationShiftsPass() : FunctionPass(ID) {}
 
-    virtual bool runOnFunction(Function &F) override{
+    virtual bool runOnFunction(Function &F){
       bool modified = false;
       std::vector<Instruction*> to_delete;
       for (auto &B : F) 
@@ -57,9 +57,7 @@ namespace {
       
       return modified;
     }
-     StringRef getPassName() const override {
-    return "multiplication-shifts-pass";
-    }
+
   };
 }
 
