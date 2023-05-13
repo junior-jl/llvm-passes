@@ -1,3 +1,13 @@
+//===- CreateVoidCall - Insert a Call to a void Function pass ------------===//
+//
+//  This pass inserts a call to a user-defined void function in the beginning of
+//  the main function.
+//
+//  Author: José Lira Junior
+//
+//===-----------------------------------------------------------------------===//
+
+
 #include "llvm/Pass.h"
 #include "llvm/IR/Function.h"
 #include "llvm/Support/raw_ostream.h"

@@ -1,3 +1,11 @@
+//===- PrintFrequency - Print Instructions by Frequency pass ------------===//
+//
+// This pass prints the frequency of each instruction in a given function
+//
+// Author: José Lira Junior
+//
+//===-----------------------------------------------------------------------===//
+
 #include "llvm/Pass.h"
 #include "llvm/IR/Function.h"
 #include "llvm/Support/raw_ostream.h"
@@ -20,13 +28,6 @@ namespace {
         {
           auto opcode = I.getOpcodeName();
           occurrences[opcode]++;
-          //auto it = occurrences.find(opcode);
-          //if (it != occurrences.end()) 
-          //{
-          //  it->second++;
-          //} else {
-          //  occurrences.emplace(opcode, 1);
-          //}
         }
       }
       outs() << "Instructions by frequency in Function " << F.getName() << "\n";

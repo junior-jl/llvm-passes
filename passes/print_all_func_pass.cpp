@@ -1,3 +1,11 @@
+//===- PrintAllFuncPass - Print all instructions in a Function pass -------===//
+//
+// This pass prints all basic blocks and instructions in a function.
+//
+// Author: José Lira Junior
+//
+//===-----------------------------------------------------------------------===//
+
 #include "llvm/Pass.h"
 #include "llvm/IR/Function.h"
 #include "llvm/IR/Module.h"

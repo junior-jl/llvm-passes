@@ -1,3 +1,11 @@
+//===- PrintFrequencyDenseMap - Print Instruction Frequency in Function pass --------===//
+//
+// This pass prints the frequency of each instruction in a function.
+//
+// Author: José Lira Junior
+//
+//===-----------------------------------------------------------------------===//
+
 #include "llvm/Pass.h"
 #include "llvm/IR/Function.h"
 #include "llvm/Support/raw_ostream.h"
@@ -8,9 +16,9 @@
 using namespace llvm;
 
 namespace {
-  struct PrintFrequency : public FunctionPass {
+  struct PrintFrequencyDenseMap : public FunctionPass {
     static char ID;
-    PrintFrequency() : FunctionPass(ID) {}
+    PrintFrequencyDenseMap() : FunctionPass(ID) {}
 
     virtual bool runOnFunction(Function &F) {
       DenseMap<const char *, int> occurrences; 
@@ -20,13 +28,6 @@ namespace {
         {
           auto opcode = I.getOpcodeName();
           occurrences[opcode]++;
-          //if (occurrences.count(opcode)) 
-          //{
-          //  auto it = occurrences.find(opcode);
-          //  it->second++;
-          //} else {
-          //  occurrences.insert({opcode, 1});
-          //}
         }
       }
       outs() << "Instructions by frequency in Function " << F.getName() << "\n";
@@ -39,13 +40,13 @@ namespace {
   };
 }
 
-char PrintFrequency::ID = 0;
+char PrintFrequencyDenseMap::ID = 0;
 
 // Automatically enable the pass.
 // http://adriansampson.net/blog/clangpass.html
 static void registerSkeletonPass(const PassManagerBuilder &,
                          legacy::PassManagerBase &PM) {
-  PM.add(new PrintFrequency());
+  PM.add(new PrintFrequencyDenseMap());
 }
 static RegisterStandardPasses
   RegisterMyPass(PassManagerBuilder::EP_EarlyAsPossible,

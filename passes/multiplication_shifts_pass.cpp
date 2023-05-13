@@ -1,3 +1,12 @@
+//===- MultiplicationShiftsPass - Replace Multiplication by Power of Two with a Left Shift pass ------------===//
+//
+//  This pass replaces multiplication operations where the second operand is a constant power of two
+//  with a corresponding left shift operation. The pass operates on all functions in the module.
+//
+//  Author: José Lira Junior
+//
+//===------------------------------------------------------------------------------------------------===//
+
 #include "llvm/Pass.h"
 #include "llvm/IR/Function.h"
 #include "llvm/Support/raw_ostream.h"

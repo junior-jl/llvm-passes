@@ -1,3 +1,15 @@
+//===- CreatePrintfCall - Insert a printf() call in main() function  -===//
+//
+//    This pass inserts a call to the printf() function in the main() function of the input program.
+//
+// NOTE:
+//    The location of the call can be changed by modifying the "step" variable in the runOnFunction() method.
+//
+// Author: José Lira Junior
+//===----------------------------------------------------------------------===//
+
+
+
 #include "llvm/Pass.h"
 #include "llvm/IR/Function.h"
 #include "llvm/Support/raw_ostream.h"
