@@ -13,5 +13,5 @@ CLANG_FLAGS="$@"
 
 
 make -C build
-echo "************ Running pass $PASS_NAME on file $INPUT_FILE ************"
+echo -e "\n************ Running pass $PASS_NAME on file $INPUT_FILE ************\n"
 clang -flegacy-pass-manager -Xclang -load -Xclang build/passes/lib"$PASS_NAME".so "$INPUT_FILE" $CLANG_FLAGS

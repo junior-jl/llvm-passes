@@ -2,7 +2,9 @@ build
 *.out
 *.o
 *.c
+!examples/*/*.c
 *.ll
+!examples/*/*.ll
 *.bc
 .vscode
 *.tmp
